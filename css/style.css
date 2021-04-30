@@ -1744,7 +1744,7 @@
     margin: 0;
   }
   .main-mobile_device {
-    background-size: 41% 50%;
+    background-size: 41% 48%;
   }
 }
 @media only screen and (max-width: 510px) {
@@ -1752,9 +1752,9 @@
     width: 40%;
     display: flex;
     justify-content: center;
-  }
-  .main-company-a {
+    padding: 10px;
     margin: 0;
+    box-sizing: border-box;
   }
 }
 @media (min-width: 768px) {
