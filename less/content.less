@@ -1,0 +1,766 @@
+
+.main {
+
+	&-elements-box{
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		width: 100%;
+		padding: 0;
+		margin: 0 auto;
+	}
+
+	&-element-box {
+		box-sizing: border-box;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		width: 272px;
+		padding-bottom: 80px;
+		cursor: default;
+		margin-right: 30px;
+	}
+
+	&-element-box:first-child {
+		padding-top: 80px;
+		.main-title-box{
+			padding: 29px 0 19px 0;	
+		}
+	}
+	&-element-box:nth-of-type(2) {
+		padding-top: 89px;
+		.main-title-box{
+			padding: 29px 0 19px 0;		
+		}
+	}
+	&-element-box:nth-of-type(3) {
+		padding-top: 84px;
+		.main-title-box{
+			padding: 30px 0 19px 0;		
+		}
+	}
+	&-element-box:last-child {
+		padding-top: 92px;
+		margin-right: 0;
+		.main-title-box{
+			padding: 30px 0 19px 0;		
+		}
+	}
+
+	&-element-box:after {
+		content: "";
+		display: block;
+		width: 70px;
+		height: 3px;
+		background-color: #f1eee9;
+	  }
+
+	  &-element-box:hover .element-icon {
+		fill: #c7b299;
+	  }
+	  
+	  &-element-box:hover .main-title-box {
+		color: #c7b299;
+	  }
+	  
+	  &-element-box:hover:after {
+		background-color: #c7b299;
+	  }
+
+	  &-element-box:active{
+		filter: brightness(75%);
+	  }
+
+	  .element-icon {
+		display: block;
+		fill: #555;
+	  }
+
+	  &-title-box {
+		  display: inline-block;
+		width: 100%;
+		margin: 0;
+		.text("Raleway", 600, 22px, 1.2, #555);
+		text-align: center;
+	  }
+
+	  &-p-element-box {
+		text-align: center;
+		margin: 0;
+		padding: 0 0 30px 0;
+		.text("Montserrat", 300, @font-14, 24px, #8c8c8c);
+	  }
+
+	  &-box-landscape{
+		padding: 83px 0 0 0;
+		background-color: #fbfaf8;
+	  }
+
+	  &-title-box-examples{
+		width: 1235px;
+		margin: 0 auto;
+		padding: 0 0 22px 0;
+		text-align: center;
+		.text(Raleway, 600, 30px, 0.8, #555);  
+	  }
+
+	  &-p-box-examples{
+		width: 770px;
+		margin: 0 auto;
+		padding: 0 0 38px 0;
+		text-align: center;
+		.text(Montserrat,300,16px, 26px, #8c8c8c);  
+	  }
+
+	  &-box-examples {
+		width: 100%;
+		margin: 0;
+		display: flex;
+		justify-content: center;
+		position: relative;
+
+		&-img:first-child {
+			position: absolute;
+			top: 82px;
+			left: 770px/2.23;
+			z-index: 1;
+			width: 770px;
+			height: 400px;
+		  }
+		  &-img:nth-child(2) {
+			margin: 0 auto;
+			z-index: 2;
+			width: 770px;
+			height: 482px;
+		  }
+		  &-img:last-child {
+			position: absolute;
+			top: 82px;
+			right: 770px/2.23;
+			z-index: 1;
+			width: 770px;
+			height: 400px;
+		  }
+		  &-img:first-child:hover {
+			z-index: 3;
+		  }
+		  &-img:last-child:hover {
+			z-index: 3;
+		  }
+	  }
+
+	  &-advertisement{
+		  display: flex;
+		  flex-wrap: wrap;
+		  padding: 50px 0 50px 0;
+		  width: 100%;
+		  background-color: #f4f5f8;
+		  background-image: linear-gradient(90.0deg, #211b19 0%, #4e3427 100%);
+
+		&-left-block{
+			box-sizing: border-box;
+			width: 1375px;
+			padding: 0 40px 0 376px;
+		}
+		&-title{
+			margin: 0;
+			padding: 0 0 8px 0;
+			display:inline-block;
+			.text("Raleway", 400, 28px, 0.9, #c7b299);  
+		}
+		&-title-2{
+			margin: 0;
+			padding: 0 0 8px 0;
+			display:inline-block;
+			.text("Raleway", 400, 28px, 0.9, #fff);  
+		}
+
+		&-p{
+			margin: 0;
+			.text("Montserrat",300, 18px, 0.9, #615855);  
+		}
+		&-button{
+			box-shadow: inset 0px -3px 0px 0px #736357;
+			margin: 0;
+			min-width: 170px;
+			padding: 19px 28px;
+			.text(Raleway, 800, 14px, 0.9, #fff);  
+			.button(#998675, uppercase);
+		}
+		&-button:hover{
+			.but-hover-active(@bgc-white, 85%, #998675, 8%);
+		}
+		&-button:active{
+			.but-hover-active(@bgc-white, 25%, #998675, 4%);
+		}
+
+	  }
+
+	  &-latest-projects{
+		  display: flex;
+		  flex-wrap: wrap;
+		  width: 100%;
+		  padding: 81px 374px 80px 376px;
+		  box-sizing: border-box;
+		  margin: 0;
+
+		&-title{
+			text-align: center;
+			box-sizing: border-box;
+			width: 100%;
+			margin: 0;
+			padding: 0 0 23px 0;
+			.text(Raleway, 600, 30px, 0.8, #555);
+		}
+
+		&-p{
+			text-align: center;
+			box-sizing: border-box;
+			width: 100%;
+			margin: 0;
+			padding: 0 198px 39px 198px;
+			.text(Montserrat, 600, 16px, 26px, #8c8c8c);
+		}
+
+		&-menu{
+			display: flex;
+			justify-content: center;
+			box-sizing: border-box;
+			width: 100%;
+			padding: 0 0 20px 0;
+			margin: 0;			
+		}
+
+		&-button{
+			border: 1px solid #ebebeb;
+			.button(@bgc-white, capitalize);
+			padding: 9px 16px;
+			box-sizing: border-box;
+			.margin(0, 10px, 20px, 0);	
+			min-width: 120px;	
+			min-height: 32px;
+			.text("Montserrat", 300, @font-14, 0.8, #8c8c8c);	
+		}
+
+		&-button:nth-of-type(1){
+			.button(#998675, capitalize);
+			min-width: 70px;	
+			.text(Montserrat, 300, @font-14, 0.8, #fff);
+		}
+
+		&-button:last-child{
+			.margin(0, 0, 20px, 0);
+			min-width: 135px;
+		}
+
+		&-button:hover{
+			.but-hover-active(@bgc-white, 0%, #998675, 0%);
+		}
+		&-button:active{
+			.but-hover-active(@bgc-white, 25%, #998675, 4%);
+		}
+
+		&-box{
+			display: flex;
+			flex-wrap: wrap;
+			width: 370px;
+			background-color: #fbfaf8;
+			.margin(0, 30px, 30px, 0);
+			position: relative;
+		}
+
+		&-box:hover &-btn-link {
+			display: block;
+		}
+		&-box:hover &-btn-search {
+			display: block;
+		}
+		&-box:hover &-btn-link:hover {
+			background-image: url('../img/link_10955.png');
+		}
+		&-box:hover &-btn-search:hover {
+			background-image: url('../img/lupa_10957.png');
+		}
+		&-box:active &-btn-link:hover {
+			filter: brightness(50%);
+		}
+		&-box:active &-btn-search:hover {
+			filter: brightness(50%);
+		}
+
+
+		&-box:hover &-img{
+			filter: brightness(40%);
+		}
+		
+		&-box:hover &-txt-wrapper{
+			background-color: #362f2d;
+		}
+		&-box:hover &-txt-wrapper::before{
+			border-bottom: 10px solid #362f2d;
+		}
+		&-txt-wrapper{
+		position: relative;
+		width: 100%;
+		}
+		&-txt-wrapper:before {
+			content: "";
+			border: 15px solid transparent;	
+			border-bottom: 10px solid #fbfaf8;
+			position: absolute;
+			top: -25px;
+			left: 19px;
+		  }
+
+		  &-btn-link, &-btn-search {
+			width: 26px;
+			height: 26px;
+			display: none;
+			-webkit-background-size: cover;
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;
+			border: none;
+			background-color: transparent;
+			position: absolute;
+			top: 106px;
+			cursor: pointer;
+			outline: none;
+		  }
+		  &-btn-link {
+			background-image: url('../img/link_10556.png');
+			left: 144px;
+		  }
+		  
+		  &-btn-search {
+			background-image: url('../img/lupa_10956.png');
+			right: 146px;
+		  }
+
+		&-box:nth-of-type(3n+1){
+			.margin(0, 0, 30px, 0);
+		}
+
+		&-img{
+			display: block;
+			width: 100%;
+		}
+
+		&-element-title{
+			display: block;
+			width: 100%;
+			.text(Raleway, 500, 20px, 0.9, #c7b299);
+			padding: 30px 28px 14px 28px;
+			box-sizing: border-box;
+		}
+
+		&-span{
+			display: block;
+			width: 100%;
+			.text(Montserrat, 300, 14px, 0.9, #d1d1d1);
+			padding: 0 30px 27px 30px;
+			box-sizing: border-box;
+		}
+
+		&-button-load{
+			display: block;
+			.button(#998675, uppercase);
+			.text(Raleway, 800, 14px, 0.9, #fff);
+			.margin( 10px, auto, 0, auto);
+			padding: 19px 44px;
+			min-width: 170px;
+			border: 0;
+		}
+		&-button-load:hover{
+			.but-hover-active(@bgc-white, 85%, #998675, 8%);
+		}
+		&-button-load:active{
+			.but-hover-active(@bgc-white, 25%, #998675, 4%);
+		}
+
+	  }
+
+	  &-video{
+	  background-color: rgba(17,17,17,0.5);	
+	  width: 100%;
+	  height: 705px;
+	  position: relative;
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  overflow: hidden;
+	  overflow-y: hidden;
+	  box-sizing: border-box;
+	  margin: 0;
+	  padding: 0;   
+	  }
+
+	  &-video-play{
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		overflow: hidden;
+		overflow-y: hidden;
+		background-size: cover;
+	  }
+	  
+
+	  &-content-play{
+		  text-align: center;
+		  z-index: 2;
+		  margin: 210px 680px 207px 680px;
+	  }
+
+	  &_button_play{
+		background-color: transparent;
+		border: none;
+		outline: none;
+		position: relative;
+		padding: 0;
+		display: inline-block;
+		cursor: pointer;
+		margin: 0 0 44px 0;
+
+	  }
+
+	  &_svg_play{
+		fill: #fff;
+		width: 70px; 
+		height: 70px;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+		z-index: 3;
+
+		&_background{
+			position: relative;
+			height: 100px;
+			width: 100px;
+			fill-opacity: 0.2;
+			fill: #000;
+			z-index: 2;
+		}
+		&:hover{
+			fill: #c7b299;
+		}
+		&:active{
+			filter: brightness(75%);
+		}
+	  }
+
+	  &-title-play{
+		margin: 0 0 27px 0;
+		padding: 0;
+		.text(Raleway, 500, 30px, 0.9, #fff);
+	  }
+	  &-pharagraph-play{
+		margin: 0 0 38px 0;
+		padding: 0;
+		.text(Montserrat, 300, 16px, 28px, #fff);
+
+	  }
+
+	  &-time{
+		margin: 0;
+		padding: 0;
+		.text(Montserrat, 400, 14px, 0.9, #c7b299);
+	  }
+
+	  &-mobile_device{
+		background: url(../img/iphone_in_hand_10962.png);
+		background-repeat: no-repeat;
+		background-position: 400px 70px;
+		background-color: #fbfaf8;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		padding: 79px 400px 0 423px;
+		box-sizing: border-box;
+		margin: 0;
+		min-height: 687px;
+
+		  &-title{
+			.text(Raleway, 600, 30px, 0.9, #555);
+			margin: 0;
+			padding: 100px 0 38px 2px;
+			box-sizing: border-box;
+            width: 61%;
+		  }
+
+		&-p{
+			.text(Montserrat, 300, 16px, 28px, #8c8c8c);
+			margin: 0;
+			padding: 0 0 34.5px 0;
+			box-sizing: border-box;
+            width: 61%;
+		}
+
+		&-list{
+            box-sizing: border-box;
+            width: 61%;
+        }
+
+		&-details{
+			padding: 0 0 0 100px;
+			.text(Montserrat, 300, 16px, 32px, #8c8c8c);
+		}
+
+		&-summary{
+			list-style: none;
+			outline: 0;
+			cursor: pointer;
+			position: relative;
+		}
+
+		&-p-2{
+			margin: 0;
+			padding: 0;
+		}
+
+		&-summary:before {
+			content: "";
+			background-image: url('../img/01_10972.png');
+			left: -50px;
+			top: 5.5px;
+			position: absolute;
+			width: 21px;
+			height: 21px;
+		  }
+
+	  }
+
+
+	&-stat{
+		background-image: linear-gradient(90.0deg, #211b19 0%, #4e3427 100%);
+		margin: 0;
+		box-sizing: border-box;
+		padding: 69px 375px 60px 375px;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		width: 100%;
+
+		&-block{
+			width: 200px;
+			display: block;
+			text-align: center;
+	
+			&-svg{
+				padding: 0 0 30px 0;
+				fill: #c7b299;
+			}
+	
+			&-span-number{
+			display: block;
+			width: 100%;
+			.text(Montserrat, 200, 48px, 36px, @bgc-white);
+			padding: 0 0 21px 0;
+	
+			}
+			&-span-name{
+				display: block;
+				width: 100%;
+				.text(Montserrat, 300, 14px, 20px, #c7b299);
+				text-transform: uppercase;
+				padding: 0 0 30px 0;
+			}
+	
+			&:after {
+				content: "";
+				display: block;
+				width: 30px;
+				height: 2px;
+				background-color: #fff;
+				margin: 0 auto;
+			  }
+	
+			  &:hover{
+				filter: brightness(60%);
+				cursor: default;
+			  }
+	
+			  &:active{
+				filter: brightness(45%);
+				cursor: default;
+			  }
+		}
+	}
+
+
+	&-articles{
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		padding: 82px 360px 80px 360px;
+
+		&-title{
+			display: flex;
+			justify-content: center;
+			margin: 0;
+			width: 100%;
+			.text(Raleway, 600, 30px, 0.9, #555);
+			padding: 0 0 29px 0;
+		}
+		
+		&-p{
+			text-align: center;
+			margin: 0;
+			width: 100%;
+			.text(Montserrat, 300, 16px, 28px, #8c8c8c);
+			padding: 0 205px 39px 205px;
+		}
+	}
+
+	&-article{
+		position: relative;
+		width: 370px;
+		margin: 0 30px 40px 0;
+		background-color: rgba(119,119,119,0.0);
+		border: 1px solid #f8f8f8;
+
+		&:hover{
+			background: #362f2d;
+			.main-article-title{ color:#c7b299;}
+			.main-article-p{ color:#fff; }
+			.main-article-calendar-number{ background: #c7b299; }
+			.main-article-calendar-month { background: #a48d72; }
+			.main-article-img{ 
+				filter: brightness(50%);
+			} 
+		}
+
+		&:nth-child(3n+2){
+			margin: 0 0 40px 0;
+		}
+
+		&-calendar{
+			position: absolute;
+			display: block;
+			top: 20px;
+			left: 20px;
+			width: 50px;
+			z-index: 1;
+
+			&-number{
+				display: block;
+				.text(Montserrat, 300, 24px, 20px, @bgc-white);
+				padding: 7.5px 10px 7.5px 11px;
+				background-color: #363636;
+				border-radius: 3px 3px 0px 0px;
+
+			}
+			&-month{
+				display: block;
+				.text(Roboto, 400, 12px, 20px, @bgc-white);
+				background-color: #252525;
+				border-radius: 0px 0px 3px 3px;
+				padding: 5px 13px 4px 14px;
+
+			}
+
+		}
+
+		&-img{
+			margin: 0;
+			padding: 0;
+			display: block;
+		}
+
+		&-title{
+			display: block;
+			margin: 0;
+			.text(Raleway, 500, 20px, 0.9, #555);
+			padding: 30px 44px 19px 29px;
+		}
+		
+		&-p{
+			margin: 0;
+			.text(Montserrat, 300, 14px, 22px, #8c8c8c);
+			padding: 0 44px 26px 29px;
+		}
+		&-a{
+			.text(Montserrat, 300, 14px, 15px, #c7b299);
+			margin: 0 44px 33px 30px;
+			display: block;
+			text-decoration: none;
+
+			&:after{
+				content:"";
+				margin-left: 9px;
+				border: 4px solid transparent; 
+				border-left: 6px solid #c7b299;
+				display: inline-block;
+	
+			}
+			&:hover{
+				filter: brightness(60%);
+				&:active{
+					filter: brightness(88%);
+				}
+			}
+
+		}
+
+	}
+
+	&-button{
+		&-left{
+		width: 22px;
+		height: 22px;
+		background-image: url(../img/left_11745.png);
+		display: inline-block;
+		border: none;
+		background-color: #fff;
+		outline: none;
+		cursor: pointer; 
+		margin: 0 8px 0 0;
+		&:hover{
+			background-image: url(../img/left_11746.png);
+		}
+		}
+		&-right{
+			width: 22px;
+			height: 22px;
+			background-image: url(../img/right_11745.png);
+			display:  inline-block;
+			border: none;
+			background-color: #fff;
+			outline: none;
+			cursor: pointer;
+			&:hover{
+				background-image: url(../img/right_11744.png);
+			}
+			
+		}
+	}
+
+	&-company{
+		background-image: url("../img/bg_photo_11122.png");
+		padding: 138px 0 138px 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+
+		&-a{
+			margin: 0 90px 0 0;
+				&:last-child{
+					margin: 0;
+				}
+			}
+			&-a:hover{
+			filter: brightness(65%);
+			}
+			&-a:active{
+				filter: brightness(45%);
+			}
+	}
+
+}

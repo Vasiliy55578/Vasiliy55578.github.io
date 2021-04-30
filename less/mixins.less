@@ -1,0 +1,38 @@
+.text(@family, @weight, @size, @line-size, @font-color) {
+	font-family: @family, "Arial", sans-serif;
+	font-weight: @weight;
+	font-size: @size;
+	line-height: @line-size;
+	color: @font-color;
+}
+ 
+.opacity(@opacity){
+	opacity: @opacity;
+}
+
+.margin(@m_top, @m_right, @m_bottom, @m_left){
+	margin-top: @m_top;
+	margin-right: @m_right;
+	margin-bottom: @m_bottom;
+	margin-left: @m_left;
+}
+
+.but-hover-active(@color, @darken, @background, @lighten){
+	color: darken(@color, @darken);
+	background: lighten(@background, @lighten);
+}
+
+.button(@background-color, @text-transform){
+	box-sizing: border-box;
+	cursor: pointer;
+	background-color: @background-color;
+	border-radius: 3px;
+	text-transform: @text-transform;
+	user-select: none;
+	outline: none;
+}
+
+.carousel-btn-hover-after( @btn-bord-col){
+	border-top: 2px solid @btn-bord-col;
+	border-right: 2px solid @btn-bord-col;
+}

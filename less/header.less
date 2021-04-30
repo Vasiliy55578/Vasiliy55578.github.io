@@ -1,0 +1,254 @@
+
+.header {
+	width: @width;
+	background-color: @bgc-header;
+	background: url(../img/bg_photo_1.png);
+	
+	&-menu{
+		.margin(0, 0, 0, 19.584%);
+		padding: 0;
+		box-sizing: border-box;
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	&-logo-link{
+	text-decoration: @none;
+	display: flex;
+	color: @bgc-white;
+	width: 181px;
+}
+	&-logo-link:hover {
+	color: #c7b299;
+}
+&-logo-link:active {
+	filter: brightness(65%);
+}
+
+&-svg-logo {
+	fill: currentColor;
+	padding: 0;
+	.margin(40px, 0, 0, 0);
+}
+
+&-logo-title{
+	.text("Raleway", 400, 34px, 0.8, "");
+	letter-spacing: -0.04em;
+	text-align: right;
+	.margin(55px, 0, 0, 0);
+}
+
+  	&-nav{
+	.margin(0, 63px, 0, 219px);
+	box-sizing: border-box;
+	width: 638px;
+}
+	&-list{
+		display: flex;
+		justify-content: space-between;
+		.margin(0, 0, 0, 0);
+		padding: 62px 0 0 0;
+		box-sizing: border-box;
+}
+
+	&-list-item, &-nav-link{
+		text-decoration: @none;
+	list-style-type: @none;
+	cursor: pointer;
+	.text("Montserrat", 300, @font-14, 1.2, @bgc-white);
+}
+	&-list-item:hover, &-nav-link:hover{
+		color: #c7b299;
+}
+&-list-item:active, &-nav-link:active{
+	filter: brightness(80%);
+}
+
+	&-cart{
+		.margin(55px, 28px, 0, 0);
+		padding: 0;
+		border: 0;
+		background: @none;
+		width: 18px;
+		height: 24px;
+		outline: @none;
+		background-image: url('../img/icon_cart_2.png');
+		background-size: contain;
+		background-repeat: no-repeat;
+		cursor: pointer;
+}
+	&-cart:hover {
+		background-image: url('../img/icon_cart_hover.png');
+	}
+	&-cart:active {
+		filter: brightness(80%);
+	}
+
+		&-search {
+		.margin(55px, 0, 0, 0);
+		padding: 0;
+		background: @none;
+		border: 0;
+		width: 24px;
+		height: 24px;
+		outline: @none;
+		background-image: url('../img/icon_search_3.png');
+		background-size: contain;
+		background-repeat: no-repeat;
+		cursor: pointer;
+		.text("Montserrat", 300, @font-14, 1.2, @bgc-white);
+	}
+	&-search:hover {	
+		background-image: url('../img/icon_search_hover.png');
+}
+
+	&-search:focus{
+		width: 300px;
+		transition: width 1s ease-out;
+		background-position: right;
+		background-image: url('../img/icon_search_hover.png');
+	}
+
+	&-carousel{
+	display: flex;
+	flex-wrap: wrap;
+	box-sizing: border-box;
+	align-items: center;
+	width: @width;
+	padding: 285px 150px 0 150px;
+	}
+
+	 &-carousel-btn{
+		.margin(0, 0, 0, 0);
+		padding: 0;
+		display: block;
+		box-sizing: border-box;
+		width: 40px;
+		height: 73px;
+		position: relative;
+		cursor: pointer;
+		background: transparent;
+		border: 0;
+		outline: none;
+	}
+
+	&-carousel-btn:after {
+		content: "";
+		display: inline-block;
+		width: 52px;
+		height: 52px;
+		border-top: 2px solid #fff;
+		border-right: 2px solid #fff;
+		position: absolute;
+		 top: 10px;
+		 left: -25px;
+		 .opacity(0.5);
+	  }
+
+	 &-carousel-btn:nth-of-type(1):after {
+		box-sizing: border-box;
+		transform: rotate(-135deg);
+		left: 13px;
+		padding: 0;
+	}
+	&-carousel-btn:nth-of-type(1){
+		.margin(0, 475px, 0, 0);
+	}
+	  
+	&-carousel-btn:nth-of-type(2):after {
+		padding: 0;
+		transform: rotate(45deg);
+		box-sizing: border-box;
+	  }
+	  &-carousel-btn:nth-of-type(2){
+		.margin(0, 0, 0, 475px);
+	}
+
+	&-carousel-btn:first-child:hover:after{
+		.carousel-btn-hover-after(#d3c1ad);
+	  }
+	  &-carousel-btn:nth-of-type(2):hover:after{
+		.carousel-btn-hover-after(#d3c1ad);
+	  }
+	  &-carousel-btn:first-child:active:after{
+		.carousel-btn-hover-after(#b89d7e);
+	  }
+	  &-carousel-btn:nth-of-type(2):active:after{
+		.carousel-btn-hover-after(#b89d7e);
+	  }
+
+	&-box{
+	text-align: center;
+	display: block;
+	width: 590px;
+	padding: 0;
+	}
+
+	&-carousel-title{
+	.text("Raleway", 500, @font-36, 0.9, @bgc-white);
+	.margin(0, 0, 0, 0);
+	padding: 0 0 14px 0;
+	}
+
+	&-carousel-title-two{
+	.text("Raleway", 800, 52px, 0.9, @bgc-white);
+	.margin(0, 0, 0, 0);
+	padding: 0;
+	}
+
+	&-carousel-p{
+	.text("Montserrat", 300, 16px, 24px, @bgc-white);
+	.margin(0, 0, 0, 0);
+	padding: 19px 0px 52px 0px;
+
+	}
+	&-btn{
+	display: inline-block;
+	width: 170px;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 21px 39px 21px 37px;
+	box-shadow: inset 0px -3px 0px 0px #736357;
+	.text("Raleway", 800, @font-14, 11px, @bgc-white);
+	.button(#998675, uppercase);
+	}
+
+	&-btn:hover{
+		.but-hover-active(@bgc-white, 85%, #998675, 8%);
+	}
+	&-btn:active{
+		.but-hover-active(@bgc-white, 25%, #998675, 4%);
+	}
+
+	&-carousel-pagination{
+	display: flex;
+	justify-content: center;
+	width: @width;
+	padding: 329px 0 42px 0;
+	box-sizing: border-box;
+	 .margin(0, 0, 0, 0);
+	}
+
+	&-carousel-pagination-item{
+		display: block;
+		box-sizing: border-box;
+		margin: 0 5px;
+		border-radius: 50%;
+		background-color: @bgc-white;
+		width: 11px;
+		height: 11px;
+		.opacity(0.5);
+	}
+
+	&-carousel-pagination-item:hover{
+		border: 2px solid #d3c1ad;
+		background-color: transparent;
+		cursor: pointer;
+		transform: scale(1.2);
+	}
+
+	&-carousel-pagination-item:active{
+		background-color: #998675;
+	}
+
+}
