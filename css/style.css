@@ -1758,7 +1758,6 @@
   }
 }
 @media (min-width: 768px) {
-  html,
   body {
     zoom: 67%;
     overflow-x: hidden;
