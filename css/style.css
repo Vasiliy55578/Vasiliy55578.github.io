@@ -1733,6 +1733,7 @@
 @media (min-width: 768px) {
   body {
     zoom: 67%;
+    overflow: hidden;
   }
   #header-check {
     display: none;
