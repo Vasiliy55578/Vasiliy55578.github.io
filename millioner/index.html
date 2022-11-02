@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Как стать миллионером</title>
+<style>
+    a, h4 {
+        color: white;
+        text-shadow: 1px 1px 1px #000;
+    }
+</style>
+</head>
+<body>
+    <div style="background-image: url(запуск.jpg); background-size: cover; border: 2px solid black; width: 600px;  justify-content: center; display: flex; flex-wrap: wrap; margin: auto;">
+    <a style="color: rgb(153, 42, 66); font-weight: bold; text-decoration: none; line-height: 40px;" href="#" onclick="startGame()">Запуск игры</a><br>
+
+    <div id = "hide" style="display:none;">
+        <img src="millioner.jpg" style="width: 100%; ">
+
+            <h4 id="header" style="margin: 0px; padding: 10px; width: 100%; justify-content: center; box-sizing: border-box; display: flex;"></h4>    
+            <div id="answers" style="display: flex; width: 100%; flex-wrap: wrap; justify-content: center;">   
+            <a id="q_1" onclick="f(this.id)" style="cursor:pointer; border: 1px solid rgb(15, 44, 206); width: 50%; margin: 0px; padding: 10px; box-sizing: border-box;">1) </a>
+            <a id="q_2" onclick="f(this.id)" style="cursor:pointer; border: 1px solid rgb(15, 44, 206); width: 50%; margin: 0px; padding: 10px; box-sizing: border-box;">2) </a>
+            <a id="q_3" onclick="f(this.id)" style="cursor:pointer; border: 1px solid rgb(15, 44, 206); width: 50%; margin: 0px; padding: 10px; box-sizing: border-box;">3) </a>
+            <a id="q_4" onclick="f(this.id)" style="cursor:pointer; border: 1px solid rgb(15, 44, 206); width: 50%; margin: 0px; padding: 10px; box-sizing: border-box;">4) </a>
+            </div> 
+    </div>
+    </div>
+    <script src="text.js" defer></script>
+    <script src="gameCode.js" defer></script>
+</body>
+</html>
