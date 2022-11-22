@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+body {
+    width: 620px;
+    margin: 0 auto;
+}
+.panel{
+    width: 50%;
+    line-height: 27px;
+    background-color: #60963d;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+    font-family: "Arial Black"; 
+    outline: none;
+}
+.panel:hover{
+    background-color: rgb(61, 95, 38);
+}
+.panel:active{
+    background-color: rgb(135, 212, 84);
+}
+
+.wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    border: 1px solid black;
+}
+
+.cell{
+
+    height: 26px;
+    width: 28px;
+    background-color: #60963d;
+    background: url("трава.jpg"); 
+    background-size: cover;
+}
+
+.food {
+   background-color: rgb(155, 0, 0); 
+    background: center / contain no-repeat url("apple.png"),
+    center / cover no-repeat  url("трава.jpg");
+}
+.game_table{
+    border-spacing: 0px;
+}
+    </style>
+
+</head>
+<body>
+    <div class="wrapper">
+    <div id="playing_field"></div>
+    <button class="panel" id="start">Старт</button>
+    <button onclick="refresh()" class="panel" >Заново</button>
+    </div>
+
+</body>
+
+<script src="main.js"></script>
+</html>
