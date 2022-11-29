@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>amoCRM</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <style>
+      * {
+            margin: 0 auto;
+        }
+        .description{
+            margin: 1% 30%;
+        }
+         .description_task, .description_note{
+            padding: 10px;
+        }
+        .note{
+            padding: 5px 10px;
+        }
+        #create-tasks {
+            display: flex;
+            justify-content: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Задача:</h1>
+    <div class="description" style="border: 1px solid black"></div>
+    <button type="button" id="create-tasks">Создать задачи для контактов без сделок</button>
+</body>
+<script>
+let p = document.createElement('p');
+p.className = 'description_task';
+let elemText = document.createTextNode("Необходимо написать js-скрипт, который работает с API системы amoCRM. Скрипт должен для всех контактов без сделок создать новую задачу с текстом \"Контакт без сделок\".");
+p.appendChild(elemText);
+$('.description').append(p);
+$(".description").append('<p class="note">Пояснения:</p><p class="description_note">amoCRM — CRM-система ведения клиентов, хранящая информацию о компаниях и контактах, а также сделках с клиентами. У каждого контакта может быть неограниченное число сделок, которые должен обработать сотрудник в процессе работы.</p><p class="note">API: <a href="https://www.amocrm.ru/developers/content/crm_platform/api-reference">https://www.amocrm.ru/developers/content/crm_platform/api-reference</a></p>');
+
+$(document).ready(function(){ 
+  $('#create-tasks').click(function() { // кнопка создания задач без сделок
+    getContacts();
+  });
+});
+/*
+Плагин для браузера CHROME решающий проблему с CORS, в настройках плагина включить Origin, Credentials и Headers, закрепить плагин и включить 
+его, загорится C 
+https://chrome.google.com/webstore/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino/related?hl=ru
+
+Если не успел за 20мин или получил и не записал токен, то заново делай: новый код авторизации
+https://www.amocrm.ru/oauth?client_id=71b6af58-5981-4d55-bb6a-46dec66866d7&state=200&mode=post_message
+
+Получаем токен через PHP
+
+$link = 'https://5zur.amocrm.ru/oauth2/access_token'; 
+
+$data = [
+    'client_id' => '71b6af58-5981-4d55-bb6a-46dec66866d7',
+    'client_secret' => 'sswjCvyeVurD9X3thQuMgDIz99mvQhyBkR33fKcCtHHA6nv7G3O9v4mEP9O8TKBJ',
+    'grant_type' => 'authorization_code',
+    'code' => 'def5020019962a9ef6df16550593dd906f7e649676eea828f6fe350b2c891352dea3a4f5cd192870175efd58b1f79d6a712e486cd1d1319f907fdc7f7ca06177aa09ba35cc4c5d747e72f1aa3441c732ca691309afdb2db793bcdaa137a89ea4f287409deecc6e659540d278ad420b2fb93dc529c006779c23fbc3db5cc142aabfd62329b98cc79d15a45a2bbd5e1ca9b731575b35fba090ce6bf8501cf6f6d6c91fcf00bfeab03ca12524f10b66b46dbb0c6b0669c9ba885186f9a2befcbefae5bf579c49a45774c29252208e97b97d6f03fd89b27c7c86756b6c2ef204516485ce9fde1c39ffb90176da6e3fec1c0faef273c94b832b20f6a43b01e16c0a73b8fd7a028cda7e46eb55bc0ce07c9b9ebe8860d3751b12a18f02edaabc81fddd51a5fc21624d7af5011d62557b931cd1c8433e251b785eb6f0398b923ed06c6d3302376c569c1db87f154c3543228fe43dfb90026a8c4609c32597c856e2048e7fbbdae7702d37cf6aff5757d5de133ac615fdc4817cbebf6541fcff81302e962b4b191ff54e67a2558d75b80bd38321e957b68ddbb134931dc27bef648246d7ff599274fa67168b79013c0c23c4351866356725773d77b1db405c45f29a44b8',
+    'redirect_uri' => 'https://5zur.amocrm.ru',
+];
+
+$curl = curl_init();
+curl_setopt($curl,CURLOPT_RETURNTRANSFER, true);
+curl_setopt($curl,CURLOPT_USERAGENT,'amoCRM-oAuth-client/1.0');
+curl_setopt($curl,CURLOPT_URL, $link);
+curl_setopt($curl,CURLOPT_HTTPHEADER,['Content-Type:application/json']);
+curl_setopt($curl,CURLOPT_HEADER, false);
+curl_setopt($curl,CURLOPT_CUSTOMREQUEST, 'POST');
+curl_setopt($curl,CURLOPT_POSTFIELDS, json_encode($data));
+curl_setopt($curl,CURLOPT_SSL_VERIFYPEER, 1);
+curl_setopt($curl,CURLOPT_SSL_VERIFYHOST, 2);
+$out = curl_exec($curl);
+$code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+curl_close($curl);
+
+$code = (int)$code;
+$errors = [
+    400 => 'Bad request',
+    401 => 'Unauthorized',
+    403 => 'Forbidden',
+    404 => 'Not found',
+    500 => 'Internal server error',
+    502 => 'Bad gateway',
+    503 => 'Service unavailable',
+];
+try
+{
+    if ($code < 200 || $code > 204) {
+        throw new Exception(isset($errors[$code]) ? $errors[$code] : 'Undefined error', $code);
+    }
+}
+catch(Exception $e)
+{
+    die('Ошибка: ' . $e->getMessage() . PHP_EOL . 'Код ошибки: ' . $e->getCode());
+}
+
+$response = json_decode($out, true);
+
+$access_token = $response['access_token']; //Access токен
+$refresh_token = $response['refresh_token']; //Refresh токен
+$token_type = $response['token_type']; //Тип токена
+$expires_in = $response['expires_in']; //Через сколько действие токена истекает
+
+echo "access_token " .$access_token ."<br>";
+echo "refresh_token " .$refresh_token ."<br>";
+echo "token_type " . $token_type ."<br>";
+echo "expires_in " . $expires_in ."<br>";
+
+access_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY3OGM2Mzc0MzY0MDFlZDdkYjAwN2E0ZmEyMTk5OTc4N2Y5YzczZjNlODc3YTI2MDBmZGZmYjM5NTY5OWNlOTVjNmQwNWFlNzg4ZDQyMTYzIn0.eyJhdWQiOiI3MWI2YWY1OC01OTgxLTRkNTUtYmI2YS00NmRlYzY2ODY2ZDciLCJqdGkiOiI2NzhjNjM3NDM2NDAxZWQ3ZGIwMDdhNGZhMjE5OTk3ODdmOWM3M2YzZTg3N2EyNjAwZmRmZmIzOTU2OTljZTk1YzZkMDVhZTc4OGQ0MjE2MyIsImlhdCI6MTY2OTc0ODk4NywibmJmIjoxNjY5NzQ4OTg3LCJleHAiOjE2Njk4MzUzODcsInN1YiI6IjcwNTQ1NzYiLCJhY2NvdW50X2lkIjoyOTQ4MzY1NiwiYmFzZV9kb21haW4iOiJhbW9jcm0ucnUiLCJzY29wZXMiOlsicHVzaF9ub3RpZmljYXRpb25zIiwiY3JtIiwibm90aWZpY2F0aW9ucyJdfQ.ZLo5HWxdiicczPE531lPNJGFMUqbjNhATuukOGDIhByDEbUhR0k4n9xzYqc5WujWgt8U5S_15aZ2LXfaZ2A4Fem17kcobSBTIgFOjhznqC-5WqS8IunxWYdbu9-lgp9kO4x8aH2AE06_Sb-CrgzArxHPzHYmQQLc9oBn7EuxcM4YfY_UyPotgi7Z8KVKjuaULI5BGeN6h4n7RBquxIWuVzA39db9f-5ukSam8S0nyTNG8ltU-3WpxDZ6NJVoloCJfPqVo8xzmlTLTGeCbyUhKTKGXBd9avrb-WWfDTtPwnL7BLS1Zt_J69OSF7UZqk_3TuEfxPYgtzhljuPAc5uHLw
+refresh_token: def5020087d304d5cdb773740be12a57b2b7b3ed3fdde98577302d4ef9d33109ca61a1daab7589719cb5ce6c0f8148cb2d7d256bed1e006f634d76ebb6146465e13bbfd52b1c3b801e6bce64fe127795b2ac9b29581466302a13a3663858a98ffb8777c5550e79b09cce0d8dbaae26197cc900c1c0bc5df5eb8e968d1200d9cade377929fdc014fd1db5b760d676ebbf8997fd87fcab14a2baca87096ba69c0eb71cf85a2ad5890c7973147b5ba23b57d2f29317b38af9a0d65a862e8664c99890a7ae39178a5fb8c1435755cf0626591293d65729bd4fcbdfa2069982cf1cfaadfa74cb11adc0ec65e8d901c22a00525eb8e541011cfc27b564f9e60ac9e7c2673bf75579101abda3800e8d2b204072ad3d5d5f03dbff0397283faa9b3d9ef33c657b80cdf97d23e4b49e8359e6736c9ca4fc0da9fb9872602bed255cc88b2c78ae83859d0df2ec49ee960eb47a76b0e19bf9d0ee928c88cd616572097374a68bf18c64e1efc09490171b185a8443a01619d679a84ca7f078bd588e0e7029414270c56b1053ef2b659506333f0f3f1643c2176f1bb0dff1836dab60eb6c43d801017897373102764a81bcf51028ba257c94994ea8d6d142d366ffe7a0090f369c6da2cd58942240ff8f
+token_type: Bearer
+expires_in: 86400
+*/
+//////////////////////////////////////////////////////////////
+// токен для авторизации на сутки
+const access_token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY3OGM2Mzc0MzY0MDFlZDdkYjAwN2E0ZmEyMTk5OTc4N2Y5YzczZjNlODc3YTI2MDBmZGZmYjM5NTY5OWNlOTVjNmQwNWFlNzg4ZDQyMTYzIn0.eyJhdWQiOiI3MWI2YWY1OC01OTgxLTRkNTUtYmI2YS00NmRlYzY2ODY2ZDciLCJqdGkiOiI2NzhjNjM3NDM2NDAxZWQ3ZGIwMDdhNGZhMjE5OTk3ODdmOWM3M2YzZTg3N2EyNjAwZmRmZmIzOTU2OTljZTk1YzZkMDVhZTc4OGQ0MjE2MyIsImlhdCI6MTY2OTc0ODk4NywibmJmIjoxNjY5NzQ4OTg3LCJleHAiOjE2Njk4MzUzODcsInN1YiI6IjcwNTQ1NzYiLCJhY2NvdW50X2lkIjoyOTQ4MzY1NiwiYmFzZV9kb21haW4iOiJhbW9jcm0ucnUiLCJzY29wZXMiOlsicHVzaF9ub3RpZmljYXRpb25zIiwiY3JtIiwibm90aWZpY2F0aW9ucyJdfQ.ZLo5HWxdiicczPE531lPNJGFMUqbjNhATuukOGDIhByDEbUhR0k4n9xzYqc5WujWgt8U5S_15aZ2LXfaZ2A4Fem17kcobSBTIgFOjhznqC-5WqS8IunxWYdbu9-lgp9kO4x8aH2AE06_Sb-CrgzArxHPzHYmQQLc9oBn7EuxcM4YfY_UyPotgi7Z8KVKjuaULI5BGeN6h4n7RBquxIWuVzA39db9f-5ukSam8S0nyTNG8ltU-3WpxDZ6NJVoloCJfPqVo8xzmlTLTGeCbyUhKTKGXBd9avrb-WWfDTtPwnL7BLS1Zt_J69OSF7UZqk_3TuEfxPYgtzhljuPAc5uHLw';
+const taskName = 'Контакт без сделок';      // название задачи
+const hostAddr = 'https://5zur.amocrm.ru';  // страница в Amocrm
+const tasksCreate = '/api/v4/tasks';        // для создания задач 
+const limit = 10;                           // отображение записей на странице
+let page = 1;                               // начинаем с 1-ой страницы
+
+let getContact = '/api/v4/contacts?order[id]=asc'; /* В документации сказано что для Списка контактов нужно использовать: Метод: GET /api/v4/contacts
+также указываем сортировку по id от низких значений к высоким, чтобы возвращались уникальные данные для страницы.
+ Пишем запрос для задач, фильтрация данных, если тип звонок и задача незавершена и у задачи есть контакт.
+ Если найдется задача с контактом без сделок, то создать новую задачу контакт без сделок.
+ Страница документации: https://www.amocrm.ru/developers/content/crm_platform/tasks-api
+*/
+let tasksContacts = '/api/v4/tasks?filter[task_type]=1&filter[is_completed]=0&filter[entity_type]=contacts';
+let ajaxCrossDomainCallers = { // CORS или кросс-доменный AJAX-запрос
+  // Получаем контакты учитывая на какой странице находимся
+  getContacts: {
+    url: getContact,
+    method: 'GET',
+    done: getContactsDone, // если запрос успешен вызов функции
+    fail: getContactsFail // в случае неудачи, обработка неудачи
+  },
+  parseContacts: {  // Проверяем существующие связанные задачи для контактов без сделок
+    url: tasksContacts,
+    method: 'GET',
+    done: parseContactsDone,
+    fail: parseContactsFail
+  },
+  createTasksWithContacts: {   // Создаем задачи для контактов без сделок
+    url: tasksCreate,
+    method: 'POST',
+    done: createTasksWithContactsDone,
+    fail: createTasksWithContactsFail
+  }
+};
+///////////////////для getContact////////////////
+function getContactsDone(data) { 
+  if (!!data) {
+    parseContacts(data._embedded.contacts); // поиск задач, создание задач для контактов без сделок
+    getContacts(); // поиск на другой странице
+  } else {
+    console.log('Контактов без сделок нет');
+    return false;
+  }
+}
+function parseContacts(contacts) {
+  let contactsWithoutLeads = getContactsWithoutLeads(contacts);   // массив контаков без сделок
+  if (!contactsWithoutLeads.length) {                             // нашлись ли контакты без сделок?
+    return false;
+  }
+  ajaxCrossDomainCall('parseContacts', { // проверяем, есть ли у найденных контактов связанные задачи
+    'filter[entity_id]': contactsWithoutLeads
+  });
+}
+function getContactsWithoutLeads(contacts) {  // функция создания контактов без сделок
+  let contactsWithoutLeads = [];
+  contacts.forEach(contact => {
+    if (!contact._embedded.leads.length) {
+      contactsWithoutLeads.push(contact.id);
+    }
+  });
+  return contactsWithoutLeads;
+}
+// Список контактов без сделок на странице с лимитом и обработка списка из callback-функции
+function getContacts() {
+  ajaxCrossDomainCall('getContacts', {
+    limit: limit,
+    page: page,
+    with: 'leads'
+  });
+  page++;
+}
+function getContactsFail(data) { // Обработка ошибки 
+  console.log('Что-то пошло не так c получением контактов', data);
+  return false;
+}
+//////////////////для parseContacts///////////
+function parseContactsDone(data, contactsWithoutLeads) { // если задачи найдены
+  if (!!data) {
+    data._embedded.tasks.forEach(task => {
+      if (task.text === taskName) { // если задача существует
+        let contactIdx = contactsWithoutLeads.indexOf(task.entity_id); // Удаляем ID контакта из массива контактов, чтобы не создавать задачу для него
+        if (contactIdx > -1) {
+          contactsWithoutLeads.splice(contactIdx, 1); // удаляем этот элемент из массива контактов
+        }
+      }
+    });
+  }
+  createTasksWithContacts(contactsWithoutLeads);  // создаем задачи для контактов без сделок
+}
+
+function createTasksWithContacts(contactsWithoutLeads) { // создание задач
+  let tasksToCreate = getTasksToCreate(contactsWithoutLeads);
+  if (!tasksToCreate.length) {     // если задач нет
+    return false;
+  }
+  ajaxCrossDomainCall('createTasksWithContacts', '[' + tasksToCreate.join(",") + ']');   // создаем задачи для контактов
+}
+function getTasksToCreate(contactsWithoutLeads) {
+  let tasksToCreate = [];
+  let completeTillUnixTimestamp = Math.floor(Date.now() / 1000 + 7 * 86400);   // срок завершения 7 суток
+  contactsWithoutLeads.forEach(contactID => { // заполним массив новых задач
+    tasksToCreate.push(
+      JSON.stringify({
+        entity_id: contactID,
+        entity_type: 'contacts',
+        text: taskName,
+        complete_till: completeTillUnixTimestamp,
+        task_type_id: 1
+      })
+    );
+  });
+  return tasksToCreate;
+}
+function parseContactsFail(data) { // В случае ошибки при попытке получить данные задач
+  console.log('Что-то пошло не так с поиском связанных задач', data);
+  return false;
+}
+///////////////для createTasksWithContacts/////////////////////
+function createTasksWithContactsDone(data) {
+  console.log('Новые задачи были созданы', data);
+}
+function createTasksWithContactsFail(data) {
+  console.log('Ошибка при попытке создать новые задачи', data);
+  return false;
+}
+///////////////////////////////////////////////////
+
+function ajaxCrossDomainCall(callerName, ajaxData) { // Создание кросс-доменных AJAX-запросов для ключевых функций
+  if (callerName in ajaxCrossDomainCallers) {
+    let ajaxCaller = ajaxCrossDomainCallers[callerName];
+    let doneFn = ajaxCaller.done;
+    let failFn = ajaxCaller.fail;
+
+    if (typeof ajaxData !== 'string' && 'filter[entity_id]' in ajaxData) {// если тип переменной строго не равен строке и ид находится в переменной (Если контакты не пусты), вызываем функцию успешного запроса
+      doneFn = function(data) {
+        ajaxCaller.done(data, ajaxData['filter[entity_id]']); // jQuery метод .done() добавляет обработчики, которые будут вызваны при изменении состояния объекта Deffered на resolved (успешное выполнение)
+      }
+    }
+    $.ajax({
+      crossDomain: true,
+      url: hostAddr + ajaxCaller.url,
+      method: ajaxCaller.method,
+      data: ajaxData,
+      dataType: 'json',
+      headers: {
+        Authorization: 'Bearer ' + access_token
+      }
+    }).done(doneFn).fail(failFn);
+  }
+}
+</script>
+</html>
